@@ -17,10 +17,14 @@ body {
 nav {
     display:flex;
     justify-content:space-between;
+    align-items:center;
     padding:15px 30px;
-    background:#111827;
+    background:#000;
 }
-nav h2 { color:#00ffcc; }
+
+nav img {
+    height:50px;
+}
 
 nav a {
     color:white;
@@ -33,21 +37,20 @@ nav a {
     text-align:center;
     padding:80px 20px;
 }
+
 .hero h1 {
     font-size:45px;
-}
-.hero p {
-    color:#aaa;
 }
 
 .btn {
     display:inline-block;
-    margin-top:20px;
+    margin-top:15px;
     padding:12px 25px;
-    background:#00ffcc;
+    background:#f5b400;
     color:black;
     text-decoration:none;
     border-radius:5px;
+    font-weight:bold;
 }
 
 /* SECTION */
@@ -64,22 +67,47 @@ nav a {
 }
 
 .card {
-    background:#111827;
+    background:#111;
     padding:20px;
     width:260px;
     border-radius:10px;
+    border:1px solid #f5b400;
 }
 
 .price {
-    color:#00ffcc;
+    color:#f5b400;
     font-size:22px;
 }
 
-/* FOOTER */
-footer {
+/* LOGIN MODAL */
+.modal {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background:#111;
+    padding:30px;
+    margin:100px auto;
+    width:300px;
+    border-radius:10px;
     text-align:center;
-    padding:20px;
-    background:#111827;
+}
+
+input {
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+}
+
+/* VIP LOCK */
+.locked {
+    opacity:0.3;
 }
 </style>
 
@@ -88,11 +116,10 @@ footer {
 <body>
 
 <nav>
-<h2>MP FX SNIPER</h2>
+<img src="logo.png">
 <div>
 <a href="#">Home</a>
-<a href="#signals">Signals</a>
-<a href="#training">Training</a>
+<a href="#" onclick="openLogin()">Login</a>
 </div>
 </nav>
 
@@ -101,70 +128,78 @@ footer {
 <p>Gold Specialist | Smart Money Concepts</p>
 
 <a class="btn" href="https://whatsapp.com/channel/0029Vb94riIHltY1ed5Ucq0m" target="_blank">
-Join Signals Channel
-</a>
-
-<a class="btn" href="https://wa.me/254716685237" target="_blank">
-Contact on WhatsApp
+Join Free Channel
 </a>
 </div>
 
-<div id="signals" class="section">
-<h2>💰 SIGNAL PACKAGES</h2>
+<div class="section">
+<h2>💰 VIP SIGNAL ACCESS</h2>
 
-<div class="cards">
-
-<div class="card">
-<h3>VIP Signals</h3>
-<p>Daily Gold Sniper Trades</p>
+<div id="vipCard" class="card locked">
+<h3>VIP Channel Access</h3>
+<p>Premium Sniper Signals</p>
 <p class="price">$30 / Month</p>
-<a class="btn" href="https://wa.me/254716685237">Subscribe</a>
-</div>
-
-<div class="card">
-<h3>Lifetime Signals</h3>
-<p>One-time payment</p>
-<p class="price">$200</p>
-<a class="btn" href="https://wa.me/254716685237">Join</a>
+<a class="btn" onclick="checkAccess()">Unlock VIP</a>
 </div>
 
 </div>
-</div>
 
-<div id="training" class="section">
+<div class="section">
 <h2>🎓 TRAINING</h2>
 
 <div class="cards">
-
 <div class="card">
 <h3>Beginner Course</h3>
-<p>Forex Basics + SMC</p>
-<p class="price">$100</p>
+<p>$100</p>
 <a class="btn" href="https://wa.me/254716685237">Apply</a>
 </div>
 
 <div class="card">
 <h3>Advanced Sniper</h3>
-<p>Liquidity + Entries</p>
-<p class="price">$300</p>
+<p>$300</p>
 <a class="btn" href="https://wa.me/254716685237">Apply</a>
 </div>
-
 </div>
 </div>
 
-<div class="section">
-<h2>📊 WHAT YOU GET</h2>
-<p>✔ Sniper Entries (Gold)</p>
-<p>✔ Buy & Sell Liquidity Setup</p>
-<p>✔ Stop Loss & Take Profit</p>
-<p>✔ News Trading Alerts</p>
-<p>✔ Mentorship Support</p>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+<div class="modal-content">
+<h2>Login</h2>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<br>
+<button class="btn" onclick="login()">Login</button>
+</div>
 </div>
 
-<footer>
-© 2026 MP FX SNIPER
-</footer>
+<script>
+let isLoggedIn = false;
+
+function openLogin(){
+    document.getElementById("loginModal").style.display="block";
+}
+
+function login(){
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if(email && password){
+        isLoggedIn = true;
+        alert("Login Successful ✅");
+        document.getElementById("loginModal").style.display="none";
+        document.getElementById("vipCard").classList.remove("locked");
+    }
+}
+
+function checkAccess(){
+    if(!isLoggedIn){
+        alert("Please login first");
+    } else {
+        window.location.href="https://wa.me/254716685237";
+    }
+}
+</script>
 
 </body>
 </html>
